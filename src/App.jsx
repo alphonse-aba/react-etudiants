@@ -1,63 +1,27 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Accueil from './pages/Accueil'
+import Etudiants from './pages/Etudiants'
+import Contact from './pages/Contact'
 
 function App() {
-  const [etudiants, setEtudiants] = useState([])
-  const [nom, setNom] = useState("")
-
-  useEffect(() => {
-    chargerEtudiants()
-  }, [])
-
-  async function chargerEtudiants() {
-    let reponse = await fetch("http://127.0.0.1:8000/etudiants/api/")
-    let data = await reponse.json()
-    setEtudiants(data.etudiants)
-  }
-
-  async function ajouterEtudiant() {
-    if (nom === "") {
-      alert("Veuillez entrer un nom !")
-      return
-    }
-    await fetch("http://127.0.0.1:8000/etudiants/api/ajouter/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nom: nom })
-    })
-    setNom("")
-    chargerEtudiants()
-  }
-
-  async function supprimerEtudiant(id) {
-    await fetch("http://127.0.0.1:8000/etudiants/api/supprimer/" + id + "/", {
-      method: "DELETE",
-    })
-    chargerEtudiants()
-  }
-
   return (
-    <div>
-      <h1>🎓 Étudiants depuis Django</h1>
+    <BrowserRouter>
 
-      <input
-        type="text"
-        placeholder="Nom de l'étudiant..."
-        value={nom}
-        onChange={(e) => setNom(e.target.value)}
-      />
-      <button onClick={ajouterEtudiant}>Ajouter</button>
+      {/* Navigation */}
+      <nav>
+        <Link to="/">Accueil</Link> |
+        <Link to="/etudiants">Étudiants</Link> |
+        <Link to="/contact">Contact</Link>
+      </nav>
 
-      <ul>
-        {etudiants.map((e) => (
-          <li key={e.id}>
-            {e.nom}
-            <button onClick={() => supprimerEtudiant(e.id)}>
-              Supprimer
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {/* Pages */}
+      <Routes>
+        <Route path="/" element={<Accueil />} />
+        <Route path="/etudiants" element={<Etudiants />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+
+    </BrowserRouter>
   )
 }
 
