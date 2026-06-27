@@ -9,7 +9,7 @@ function Etudiants() {
   }, [])
 
   async function chargerEtudiants() {
-    let reponse = await fetch("http://127.0.0.1:8000/etudiants/api/")
+    let reponse = await fetch("https://student-manager-web-production.up.railway.app/etudiants/api/")
     let data = await reponse.json()
     setEtudiants(data.etudiants)
   }
@@ -19,7 +19,7 @@ function Etudiants() {
       alert("Veuillez entrer un nom !")
       return
     }
-    await fetch("http://127.0.0.1:8000/etudiants/api/ajouter/", {
+    await fetch("https://student-manager-web-production.up.railway.app/etudiants/api/ajouter/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nom: nom })
@@ -29,14 +29,14 @@ function Etudiants() {
   }
 
   async function supprimerEtudiant(id) {
-    await fetch("http://127.0.0.1:8000/etudiants/api/supprimer/" + id + "/", {
+    await fetch("https://student-manager-web-production.up.railway.app/etudiants/api/supprimer/" + id + "/", {
       method: "DELETE",
     })
     chargerEtudiants()
   }
 
   return (
-     <div className="page">
+    <div className="page">
       <h1>🎓 Gestionnaire d'étudiants</h1>
 
       <input
@@ -59,8 +59,6 @@ function Etudiants() {
       </ul>
     </div>
   )
- 
-
 }
 
 export default Etudiants
