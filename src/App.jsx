@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import './App.css'
 import Accueil from './pages/Accueil'
 import Etudiants from './pages/Etudiants'
 import Contact from './pages/Contact'

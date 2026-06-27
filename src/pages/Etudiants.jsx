@@ -36,7 +36,7 @@ function Etudiants() {
   }
 
   return (
-    <div>
+     <div className="page">
       <h1>🎓 Gestionnaire d'étudiants</h1>
 
       <input
@@ -59,6 +59,8 @@ function Etudiants() {
       </ul>
     </div>
   )
+ 
+
 }
 
 export default Etudiants

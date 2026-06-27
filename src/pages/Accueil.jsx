@@ -1,6 +1,6 @@
 function Accueil() {
   return (
-    <div>
+    <div className="page">
       <h1>🏠 Page d'accueil</h1>
       <p>Bienvenue sur mon application !</p>
       <p>Cette application est faite pour gérer les étudiants de n'importe quelle université.</p>
